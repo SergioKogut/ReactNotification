@@ -6,6 +6,7 @@ const Container = styled.div`
 background-color: ${props => props.color};
 color: white;
 padding: 16px;
+border-radius: 25px;
 position: absolute;
 top: ${props => props.top}px;
 right: 16px;
@@ -20,8 +21,8 @@ margin-left: 8px;
 
 const emitter = new ee();
 
-export const notify = (msg) => {
-    emitter.emit('notification', msg, true);
+export const notify = (msg, color) => {
+    emitter.emit('notification', msg, color, true);
 }
 
 export default class Notifications extends React.Component {
@@ -34,16 +35,16 @@ export default class Notifications extends React.Component {
             message: '',
             color: '#444'
         }
-        emitter.on('notification', (msg) => {
-            this.showNotification(msg);
+        emitter.on('notification', (msg,color) => {
+            this.showNotification(msg,color);
         });
 
     }
-    showNotification = (msg) => {
+    showNotification = (msg,color) => {
         this.setState({
             top: 16,
             message: msg,
-            color: this.props.color
+            color: color
         }, () => {
             setTimeout(() => {
                 this.setState({ top: -100 });
@@ -54,10 +55,10 @@ export default class Notifications extends React.Component {
     render() {
         console.log('------- Notifications props------', this.props);
         const { top, message, color } = this.state;
+        console.log('------- Notifications top, message, color', top, message, color);
         return (
             <React.Fragment>
-                {/* <button className="btn btn-info" onClick={this.showNotification}>Click me</button> */}
-                <Container top={top} color={color}>{message}<i className="fa fa-bell"></i></Container>
+                    <Container top={top} color={color}>{message}<i className="fa fa-bell"></i></Container>
             </React.Fragment>
         );
     }

@@ -7,12 +7,8 @@ const ButtonStyle = {
     margin: "0px 10px"
 }
 
-const InputStyle = {
-    
-}
 
 class Home extends Component {
-
 
     state = {
         valueAdd: 10,
@@ -36,43 +32,49 @@ class Home extends Component {
         const { valueAdd,textMessage,colorId } = this.state;
         return (
             <div>
-                <Notifications color={colorId} />
-                <h1>Home page</h1>
-                <button className="btn btn-success" onClick={()=>notify(textMessage)}> Click me</button>
+                <Notifications />
+                <h1>Home page Count: {count}</h1>
+                 
+                <button className="btn btn-success" 
+                   onClick={()=>notify(textMessage,colorId)} 
+                   style={{'margin-bottom':'10px','border-radius': '25px'}}>
+                        Click me
+                </button>
+               
+               
                 <div className="input-group mb-2 input-group-lg">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text">Text message: </span>
+                    <div className="input-group-prepend" >
+                        <span className="input-group-text" >Message:</span>
                     </div>
                     <input type="text"
-                        style={InputStyle}
                         id="message"
                         name="message"
-                        value={this.state.textMessage}
+                        value={textMessage}
                         onChange={this.handleChangeText}
                     />
                 </div>
+
                 <div className="input-group mb-2 input-group-lg">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text">Color Id: </span>
+                    <div className="input-group-prepend" >
+                        <span className="input-group-text" s>Color Id:</span>
                     </div>
                     <input type="text"
-                        style={InputStyle}
                         id="colorid"
-                        name="Colorid"
+                        name="colorid"
                         value={this.state.colorId}
                         onChange={this.handleChangeColor}
                     />
                 </div>
 
 
-                <h1>Count: {count}</h1>
+                
             
                 <div className="input-group mb-2 input-group-lg">
                     <div className="input-group-prepend">
                         <span className="input-group-text">Value: </span>
                     </div>
                     <input type="text"
-                        style={InputStyle}
+                        
                         id="values"
                         name="values"
                         value={this.state.valueAdd}
